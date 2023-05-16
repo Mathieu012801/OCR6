@@ -186,3 +186,23 @@ footer nav ul {
 	margin: 2em
 }
 
+/* Login */
+#container {
+	width: 50%;
+	margin: auto;
+  }
+  #container h2 {
+	text-align: center;
+	margin-bottom: 30px;
+  }
+  #container #login {
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+  }
+  #container #login .forget {
+	text-align: center;
+  }
+  #container #login .forget a {
+	color: black;
+  }
