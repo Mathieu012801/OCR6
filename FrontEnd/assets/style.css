@@ -132,6 +132,30 @@ li:hover {
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 }
+/* Button */
+#filter-container {
+    margin-bottom: 3em;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+#filter-container button {
+    min-width: 100px;
+    font-family: 'Syne';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    border-radius: 60px;
+    color: #1D6154;
+    height: 37px;
+    border: 1px solid #1D6154;
+}
+#filter-container button:hover{
+    background-color: #1D6154;
+    color: white;
+}
+
 
 .gallery img {
 	width: 100%;
@@ -206,3 +230,16 @@ footer nav ul {
   #container #login .forget a {
 	color: black;
   }
+
+  a{
+	text-decoration: none;
+	color: inherit;
+  }
+
+  .styleb{
+	height: 50px;
+    font-size: 1.2em;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+  
