@@ -90,6 +90,10 @@ nav ul {
 	list-style-type: none;
 
 }
+nav a{
+	text-decoration: none;
+	color: black;
+}
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
@@ -211,35 +215,38 @@ footer nav ul {
 }
 
 /* Login */
-#container {
-	width: 50%;
-	margin: auto;
-  }
-  #container h2 {
-	text-align: center;
-	margin-bottom: 30px;
-  }
-  #container #login {
-	text-align: left;
-	display: flex;
-	flex-direction: column;
-  }
-  #container #login .forget {
-	text-align: center;
-  }
-  #container #login .forget a {
-	color: black;
-  }
-
-  a{
-	text-decoration: none;
-	color: inherit;
-  }
-
-  .styleb{
-	height: 50px;
-    font-size: 1.2em;
-    border: none;
-    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+#login h2{
+    text-align: center;
+    margin: 150px 0 50px 0;
 }
-  
+#login form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#login label {
+    margin: 0 380px;
+}
+#login input {
+    width: 380px;
+    height: 50px;
+    margin: 10px auto 30px auto;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.connexion {
+    width: 180px;
+    height: 36px;
+    margin: 0 auto;
+    color: white;
+    background: #1D6154;
+    border: none;
+    border-radius: 60px;
+}
+
+#login a {
+    text-align: center;
+    color: black;
+    margin: 25px 25px 19% 25px;
+}
