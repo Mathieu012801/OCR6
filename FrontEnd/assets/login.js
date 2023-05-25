@@ -1,4 +1,4 @@
-// Attache un gestionnaire d'événement au bouton de connexion lorsque le clic se produit
+//  d'événement au bouton de connexion lorsque le clic se produit
 document.getElementById('btnConnexion').addEventListener('click', function(event) {
   event.preventDefault(); // Empêche le comportement par défaut du formulaire
 
@@ -18,15 +18,15 @@ document.getElementById('btnConnexion').addEventListener('click', function(event
       headers: {
           'Content-Type': 'application/json' // Définit le type de contenu de la requête comme JSON
       },
-      body: JSON.stringify(loginData) // Convertit les données de connexion en chaîne JSON
+      body: JSON.stringify(loginData) // Convertit les données de connexion en  JSON
   })
   .then(response => response.json()) // Récupère la réponse et la convertit en JSON
   .then(data => {
-      // Vérifie si la réponse contient un identifiant d'utilisateur et un jeton
+      // Vérifie si la réponse contient un identifiant d'utilisateur et un token 
       if (data.userId && data.token) {
           const token = data.token;
 
-          // Stocke le jeton dans le stockage local du navigateur
+          // Stocke le token dans le stockage local du navigateur
           localStorage.setItem('token', token);
 
           // Redirige vers la page d'accueil

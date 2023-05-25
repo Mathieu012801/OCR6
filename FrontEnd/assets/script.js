@@ -92,3 +92,17 @@ function filterImagesCategory(categoryId) {
         }
     });
 }
+const loginElement = document.getElementById('logout');
+
+if (localStorage.getItem('token')) {
+    loginElement.textContent = 'logout';
+} else {
+    loginElement.textContent = 'login';
+};
+
+loginElement.addEventListener('click', () => {
+    if (localStorage.getItem('token')) {
+        localStorage.removeItem('token');
+        loginElement.textContent = 'Login';
+    }
+});

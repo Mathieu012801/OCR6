@@ -9,25 +9,44 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<script src="https://kit.fontawesome.com/4dc22cd92e.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <header>
-	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+	<div class="edit_bannier edited">
+		<p><i class="fa-regular fa-pen-to-square"></i> Mode édition</p>
+		<button type="button" class="edit_button">publier les changements</button>
+	</div>
+	<div class="rajout">
+	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+	<a href="#" class="edited"><i class="fa-regular fa-pen-to-square"></i><span>modifier</span></a>
 	<nav>
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<a href="login.html"><li>login</li></a>
+			<a id="logout" href="login.html"><li>login</li></a>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
+</div>
 </header>
 <main>
+	<!-- <div class="modal-container">
+		<div class="overlay modal modal-trigger"></div>
+		<div class="modal">
+			<button class="modal-close-button modal-trigger">X</button>
+			<h1 class="modal-title">Galerie photo</h1>
+			<div class="gallery-modal"></div>
+			<input type="submit" class="add-pictures" value="Ajouter une photo">
+			<a href="#" class="delete-link">Supprimer la galerie</a>
+		</div>
+	</div>  -->
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
 		</figure>
 		<article>
+			<a href="#" class="edited"><i class="fa-regular fa-pen-to-square"></i><span>modifier</span></a>
 			<h2>Designer d'espace</h2>
 			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
 			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
@@ -35,7 +54,8 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+
+		<h2>Mes Projets</h2><a href="#" class="edited"><i class="fa-regular fa-pen-to-square"></i><span>modifier</span></a>
 		<div id="filter-container">
 			
 		</div>

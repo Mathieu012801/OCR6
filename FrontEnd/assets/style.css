@@ -52,14 +52,16 @@ body {
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	background: #fffef8;
 }
 header {
 	display: flex;
-	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 0;
+	flex-direction: column;
+	
 }
 section {
-	margin: 50px 0
+	margin: 50px 0;
 }
 
 h1{
@@ -98,6 +100,10 @@ nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
 }
+header li img{
+	width: 19.36px;
+	height: 19.36px;
+}
 
 li:hover {
 	color: #B1663C;
@@ -107,7 +113,7 @@ li:hover {
 	align-items: center;
 }
 #introduction figure {
-	flex: 1
+	flex: 1.5
 }
 #introduction img {
 	display: block;
@@ -123,7 +129,11 @@ li:hover {
 }
 
 #introduction p {
-	margin-bottom: 0.5em;
+	margin-bottom: 1.5em;
+	line-height:  16px; 
+	font-weight: 400;
+	font-size: 14px;
+	vertical-align: top;
 }
 #portfolio h2 {
 	text-align: center;
@@ -156,7 +166,7 @@ li:hover {
     border: 1px solid #1D6154;
 }
 #filter-container button:hover{
-    background-color: #1D6154;
+    background-color: #0E2F28;
     color: white;
 }
 
@@ -207,14 +217,47 @@ input[type="submit"]{
 	text-align: center;
 	border-radius: 60px ;
 }
-
+footer{
+	background: #FFFFFF;
+	margin-right: -20%;
+	margin-left: -20%;
+	height: 60px;
+}
+footer nav{
+	padding-right: 12%;
+}
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	margin: 2em;
+	
+
+
+}
+/* Edit */
+.header_edit{
+	display: flex;
+	flex-direction: column;
+}
+.rajout{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
+.edit_title-nav{
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+footer nav li
+
 /* Login */
+.align-itemCenter{
+ text-align: center;
+}
 #login h2{
     text-align: center;
     margin: 150px 0 50px 0;
@@ -223,6 +266,41 @@ footer nav ul {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+.header_edit{
+	display: flex;
+	flex-direction: column;
+}
+.edit_title-nav{
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.edit_bannier{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 21px;
+	position: relative;
+	top: -50px;
+	background: black;
+	color: white;
+	width: 150%;
+	height: 59px;
+	margin-left: -25%;
+}
+.edit_button{
+	width: 216px;
+	height: 38px;
+	font-weight: 500;
+	font-size: 14px;
+	border: none;
+	border-radius: 60px;
+	background-color: #FFFFFF;
+	color: black;
+	cursor: pointer;
 }
 #login label {
     margin: 0 380px;
@@ -250,3 +328,5 @@ footer nav ul {
     color: black;
     margin: 25px 25px 19% 25px;
 }
+/* Modal */
+/* Styles généraux */
