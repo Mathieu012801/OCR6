@@ -1,6 +1,7 @@
 // Récupération des éléments DOM
 const gallery = document.getElementById('gallery'); // Élément DOM de la galerie d'images
 const filterContainer = document.getElementById('filter-container'); // Élément DOM du conteneur de filtrage
+const edited= document.querySelectorAll('.edited');
 
 // Appel à l'API pour obtenir les données des œuvres
 fetch('http://localhost:5678/api/works')
@@ -106,3 +107,20 @@ loginElement.addEventListener('click', () => {
         loginElement.textContent = 'Login';
     }
 });
+
+// EDITER
+const editionDiv = document.querySelector('.edit_bannier');
+
+if (localStorage.getItem('token')!=null) {
+  edited.forEach (edit=> {
+    edit.style.display=('flex')
+
+  })
+  document.querySelector('#filter-container').style.display='none';
+
+} else {
+    edited.forEach (edit => {
+        edit.style.display=('none');})
+  document.querySelector('#filter-container').style.display='flex';
+  
+}

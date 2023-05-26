@@ -54,6 +54,30 @@ body {
 	font-size: 14px;
 	background: #fffef8;
 }
+a{
+	text-decoration: none;
+}
+.black{
+	color: black;
+}
+.photo{
+	position: relative;
+	top: 504px;
+	right:451px;
+}
+.filtres{
+	position: relative;
+    left: 632px;
+    left: 673px;
+    top: -48px;
+}
+  
+
+.up{
+	bottom: 5px;
+	position: relative;
+
+}
 header {
 	display: flex;
 	margin: 50px 0;
@@ -235,6 +259,9 @@ footer nav ul {
 
 }
 /* Edit */
+.edited{
+	display: none;
+}
 .header_edit{
 	display: flex;
 	flex-direction: column;
