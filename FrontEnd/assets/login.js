@@ -41,3 +41,7 @@ document.getElementById('btnConnexion').addEventListener('click', function(event
       console.error('Erreur lors de la requête de login:', error);
   });
 });
+
+if (localStorage.getItem("token")!=null){
+    window.location.assign("index.html");
+};

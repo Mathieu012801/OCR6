@@ -2,6 +2,7 @@
 const gallery = document.getElementById('gallery'); // Élément DOM de la galerie d'images
 const filterContainer = document.getElementById('filter-container'); // Élément DOM du conteneur de filtrage
 const edited= document.querySelectorAll('.edited');
+const galleryModal= document.querySelector('.gallery-modal');
 
 // Appel à l'API pour obtenir les données des œuvres
 fetch('http://localhost:5678/api/works')
@@ -28,6 +29,7 @@ function parcourirTableau(data) {
         figureElement.dataset.categoryId = works.categoryId; // Associe l'ID de catégorie à l'attribut data-categoryId de l'élément <figure>
 
         gallery.appendChild(figureElement); // Ajoute l'élément <figure> à la galerie
+      
     });
 }
 
@@ -113,7 +115,8 @@ const editionDiv = document.querySelector('.edit_bannier');
 
 if (localStorage.getItem('token')!=null) {
   edited.forEach (edit=> {
-    edit.style.display=('flex')
+    edit.style.display=('flex');
+
 
   })
   document.querySelector('#filter-container').style.display='none';
@@ -123,4 +126,48 @@ if (localStorage.getItem('token')!=null) {
         edit.style.display=('none');})
   document.querySelector('#filter-container').style.display='flex';
   
+}
+function toggleModal(){
+    document.querySelector(".modal-container").classList.toggle("active");
+ 
+    
+};
+
+
+document.querySelectorAll(".modal-trigger").forEach(trigger => trigger.addEventListener("click", function(){
+
+    toggleModal();
+    fetch('http://localhost:5678/api/works')
+    .then(response => response.json()) // Convertit la réponse en format JSON
+    .then(data => {
+        if(document.querySelector(".gallery-modal").firstElementChild==undefined){
+            generategalerymodal(data); // Appelle la fonction pour afficher les données des œuvres
+        }
+      
+
+    });
+}))
+
+function generategalerymodal(data) {
+    data.forEach(works => {
+
+        const figureElement = document.createElement('figure'); // Crée un élément <figure>
+        const imgElement = document.createElement('img'); // Crée un élément <img>
+        imgElement.src = works.imageUrl; // Définit l'URL de l'image
+        imgElement.alt = works.title; // Définit l'attribut alt de l'image
+
+        const figcaptionElement = document.createElement('figcaption'); // Crée un élément <figcaption>
+        figcaptionElement.innerHTML = 'éditer' // Définit le texte du <figcaption>
+
+        figureElement.appendChild(imgElement); // Ajoute l'élément <img> à l'élément <figure>
+        figureElement.appendChild(figcaptionElement); // Ajoute l'élément <figcaption> à l'élément <figure>
+
+        figureElement.dataset.categoryId = works.categoryId; // Associe l'ID de catégorie à l'attribut data-categoryId de l'élément <figure>
+
+        galleryModal.appendChild(figureElement); // Ajoute l'élément <figure> à la galerie
+
+
+      
+    });
+
 }
