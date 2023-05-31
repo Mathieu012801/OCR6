@@ -67,9 +67,9 @@ a{
 }
 .filtres{
 	position: relative;
-    left: 632px;
-    left: 673px;
-    top: -48px;
+    width: 58px;
+    bottom: 48px;
+    left: 676px;
 }
   
 
@@ -398,6 +398,7 @@ footer nav li
 	left: 50%;
 	transform: translate(-50%, -50%);
 	transition: opacity 0.2s ease-out;
+	z-index: 9999;
 }
 .modal-container.active .modal{
 	opacity: 1;
@@ -427,6 +428,7 @@ footer nav li
 .gallery-modal figure > img{
     width: 78px;
     height: 104px;
+
 }
 .close-modal{
     font-weight: bold;
@@ -439,4 +441,29 @@ footer nav li
     background-color: #FFFFFF;
     color: #000000;
     cursor: pointer;
+}
+
+.btn-delete{
+	position: absolute;
+	background-color: #000000;
+	width: 17px;
+	height: 17px;
+	padding: 4px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: 6px;
+	left: 54.75px;
+}
+.gallery-modal figure{
+	 position: relative;
+	
+}
+.btn-delete img{
+	width: 9px;
+	height: 9px;
+}
+
+.delete-a{
+	color: #D65353;
 }

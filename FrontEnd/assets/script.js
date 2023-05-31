@@ -150,17 +150,32 @@ document.querySelectorAll(".modal-trigger").forEach(trigger => trigger.addEventL
 
 function generategalerymodal(data) {
     data.forEach(works => {
-
+        const btnDelete= document.createElement ('button');
+        const figcaptionElement = document.createElement('figcaption'); // Crée un élément <figcaption>
         const figureElement = document.createElement('figure'); // Crée un élément <figure>
         const imgElement = document.createElement('img'); // Crée un élément <img>
+        const deleteImg= document.createElement('img')
+
+
+      
         imgElement.src = works.imageUrl; // Définit l'URL de l'image
         imgElement.alt = works.title; // Définit l'attribut alt de l'image
 
-        const figcaptionElement = document.createElement('figcaption'); // Crée un élément <figcaption>
+        
         figcaptionElement.innerHTML = 'éditer' // Définit le texte du <figcaption>
+
+        btnDelete.classList.add("btn-delete");
+        btnDelete.appendChild(deleteImg); //ajouter l'image dans le bouton 
+         deleteImg.src="./assets/images/vector.png";
+
+
 
         figureElement.appendChild(imgElement); // Ajoute l'élément <img> à l'élément <figure>
         figureElement.appendChild(figcaptionElement); // Ajoute l'élément <figcaption> à l'élément <figure>
+        figureElement.appendChild(btnDelete);
+
+
+
 
         figureElement.dataset.categoryId = works.categoryId; // Associe l'ID de catégorie à l'attribut data-categoryId de l'élément <figure>
 
