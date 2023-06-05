@@ -3,6 +3,7 @@ const gallery = document.getElementById('gallery'); // Élément DOM de la galer
 const filterContainer = document.getElementById('filter-container'); // Élément DOM du conteneur de filtrage
 const edited= document.querySelectorAll('.edited');
 const galleryModal= document.querySelector('.gallery-modal');
+let tokenValue = localStorage.token;
 
 // Appel à l'API pour obtenir les données des œuvres
 fetch('http://localhost:5678/api/works')
@@ -147,42 +148,57 @@ document.querySelectorAll(".modal-trigger").forEach(trigger => trigger.addEventL
 
     });
 }))
-
 function generategalerymodal(data) {
     data.forEach(works => {
-        const btnDelete= document.createElement ('button');
-        const figcaptionElement = document.createElement('figcaption'); // Crée un élément <figcaption>
-        const figureElement = document.createElement('figure'); // Crée un élément <figure>
-        const imgElement = document.createElement('img'); // Crée un élément <img>
-        const deleteImg= document.createElement('img')
+        const btnDelete = document.createElement('button');
+        const figcaptionElement = document.createElement('figcaption');
+        const figureElement = document.createElement('figure');
+        const imgElement = document.createElement('img');
+        const deleteImg = document.createElement('img');
 
+        imgElement.src = works.imageUrl;
+        imgElement.alt = works.title;
 
-      
-        imgElement.src = works.imageUrl; // Définit l'URL de l'image
-        imgElement.alt = works.title; // Définit l'attribut alt de l'image
-
-        
-        figcaptionElement.innerHTML = 'éditer' // Définit le texte du <figcaption>
+        figcaptionElement.innerHTML = 'éditer';
 
         btnDelete.classList.add("btn-delete");
-        btnDelete.appendChild(deleteImg); //ajouter l'image dans le bouton 
-         deleteImg.src="./assets/images/vector.png";
+        btnDelete.appendChild(deleteImg);
+        deleteImg.src = "./assets/images/vector.png";
 
-
-
-        figureElement.appendChild(imgElement); // Ajoute l'élément <img> à l'élément <figure>
-        figureElement.appendChild(figcaptionElement); // Ajoute l'élément <figcaption> à l'élément <figure>
+        figureElement.appendChild(imgElement);
+        figureElement.appendChild(figcaptionElement);
         figureElement.appendChild(btnDelete);
 
+        figureElement.dataset.categoryId = works.categoryId;
 
+        galleryModal.appendChild(figureElement);
 
-
-        figureElement.dataset.categoryId = works.categoryId; // Associe l'ID de catégorie à l'attribut data-categoryId de l'élément <figure>
-
-        galleryModal.appendChild(figureElement); // Ajoute l'élément <figure> à la galerie
-
-
-      
+        btnDelete.addEventListener('click', function () {
+            deleteWork(works.id)
+        });
     });
 
+    
 }
+const deleteWork = async (id) => {
+    console.log(id);
+    const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': "application/json",
+            'Authorization': `Bearer ${tokenValue}`
+        }
+    });
+    if (response.ok) {
+        console.log('Supprimé');
+    } else {
+        console.error(`HTTP error! Status: ${response.status}`);
+    }
+};
+
+
+    
+
+
+
+  

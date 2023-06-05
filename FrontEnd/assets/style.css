@@ -70,6 +70,7 @@ a{
     width: 58px;
     bottom: 48px;
     left: 676px;
+	
 }
   
 
@@ -365,6 +366,7 @@ footer nav li
 	margin-left: -16%;
 	visibility: hidden;
 	transition: visibility 0.4s;
+	z-index: 2;
 }
 .modal-container.active{
 	visibility: visible;

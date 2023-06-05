@@ -45,3 +45,6 @@ document.getElementById('btnConnexion').addEventListener('click', function(event
 if (localStorage.getItem("token")!=null){
     window.location.assign("index.html");
 };
+
+
+
