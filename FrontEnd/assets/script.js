@@ -9,6 +9,7 @@ let tokenValue = localStorage.token;
 fetch('http://localhost:5678/api/works')
     .then(response => response.json()) // Convertit la réponse en format JSON
     .then(data => {
+        clearGallery(); // Vide les galeries existantes
         parcourirTableau(data); // Appelle la fonction pour afficher les données des œuvres
 })
 
@@ -183,20 +184,55 @@ function generategalerymodal(data) {
 const deleteWork = async (id) => {
     console.log(id);
     const response = await fetch(`http://localhost:5678/api/works/${id}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': "application/json",
-            'Authorization': `Bearer ${tokenValue}`
-        }
+      method: 'DELETE',
+      headers: {
+        accept: "*/*",
+        'Authorization': `Bearer ${tokenValue}`
+      }
     });
     if (response.ok) {
-        console.log('Supprimé');
+      console.log('Supprimé');
+      clearGallery();
+      await fetch('http://localhost:5678/api/works')
+      .then(response => response.json()) // Convertit la réponse en format JSON
+      .then(data => {
+          if(document.querySelector(".gallery-modal").firstElementChild==undefined){
+              generategalerymodal(data); // Appelle la fonction pour afficher les données des œuvres
+              parcourirTableau(data);
+          }
+        else if(response.status === "401"){
+            window.location.assign("login.html");
+        }
+        
+  
+      });
+    
+   
+
+      // Supprimer la figure du DOM une fois la suppression effectuée
+      const figureElement = document.querySelector(`#gallery figure[data-id="${id}"]`);
+      if (figureElement) {
+        figureElement.remove();
+      }
     } else {
-        console.error(`HTTP error! Status: ${response.status}`);
+      console.error(`HTTP error! Status: ${response.status}`);
     }
-};
+  };
+  
+// fonction pour vider les galeries existantes
+function clearGallery() {
+    gallery.innerHTML = '';
+    galleryModal.innerHTML = '';
+  }
 
+  function generateAddModal(){
 
+  }
+// //   permet d'afficher modal ajout 
+// const btnAddPictures= document.querySelector(".add-pics"){
+//     generateAddModal();
+
+// }
     
 
 

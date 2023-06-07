@@ -26,12 +26,15 @@ document.getElementById('btnConnexion').addEventListener('click', function(event
       if (data.userId && data.token) {
           const token = data.token;
 
+          // Redirige vers la page d'accueil
+          window.location.href = './index.html';
+          localStorage.clear();
           // Stocke le token dans le stockage local du navigateur
           localStorage.setItem('token', token);
 
-          // Redirige vers la page d'accueil
-          window.location.href = './index.html';
-      } else {
+        }else if(response.status === "401"){
+            window.location.assign("login.html");
+        } else {
           // Affiche une alerte en cas de réponse invalide
           alert('Erreur de connexion : Réponse invalide');
       }
