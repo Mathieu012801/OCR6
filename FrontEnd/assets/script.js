@@ -297,7 +297,7 @@ document.querySelector(".add-pics").addEventListener("click", function(e){
  async function backToFirstModal() {
     if (document.querySelector('.arrowback') !== null) {
         document.querySelector('.arrowback').remove();
-      }©
+      }
     galleryModal.innerHTML = '';
     document.querySelector('.delete-a').style.display = 'block';
     document.querySelector('.add-pics').setAttribute('value', 'Ajouter une photo');
