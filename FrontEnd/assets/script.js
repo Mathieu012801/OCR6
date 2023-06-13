@@ -1,3 +1,5 @@
+
+
 // Récupération des éléments DOM
 const gallery = document.getElementById('gallery'); // Élément DOM de la galerie d'images
 const filterContainer = document.getElementById('filter-container'); // Élément DOM du conteneur de filtrage
@@ -129,11 +131,11 @@ if (localStorage.getItem('token')!=null) {
   document.querySelector('#filter-container').style.display='flex';
   
 }
-function toggleModal() {
+ async function toggleModal() {
     document.querySelector('.modal-container').classList.toggle('active');
-    backToFirstModal();
+     await backToFirstModal();
   
-    if (document.querySelector('.arrowback') !== undefined) {
+    if (document.querySelector('.arrowback') !== null) {
       document.querySelector('.arrowback').remove();
     }
   }
@@ -293,6 +295,9 @@ document.querySelector(".add-pics").addEventListener("click", function(e){
 
 //fonction qui va permettre de regenerer la première modal 
  async function backToFirstModal() {
+    if (document.querySelector('.arrowback') !== null) {
+        document.querySelector('.arrowback').remove();
+      }©
     galleryModal.innerHTML = '';
     document.querySelector('.delete-a').style.display = 'block';
     document.querySelector('.add-pics').setAttribute('value', 'Ajouter une photo');
@@ -301,6 +306,7 @@ document.querySelector(".add-pics").addEventListener("click", function(e){
     galleryModal.style.borderBottom = '1px solid #B3B3B3';
     galleryModal.style.width = '420px';
     document.querySelector('.modal-title').innerHTML="Galerie photo";
+
     await  fetch('http://localhost:5678/api/works')
     .then(response => response.json()) // Convertit la réponse en format JSON
     .then(data => {
