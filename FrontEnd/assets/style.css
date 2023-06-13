@@ -237,7 +237,7 @@ input[type="submit"]{
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
-	margin : 2em auto ;
+	margin : 32px auto ;
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
@@ -475,17 +475,24 @@ footer nav li
 .arrowback {
 	position: absolute;
 	left: 20px;
-	top: 20px;
+	top: 40px;
 	background-color: #fff;
 	border: none;
 	cursor: pointer;
+}
+.modal-add{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .modal-add span{
 	border-top: 1px solid #B3B3B3;
 	text-align: center;
-	margin-top: 26px;
-	padding-top: 32px;
+	margin-top: 21px;
+	width: 100%;
+	
 }
 .file-input{
 	display: flex;
@@ -539,6 +546,9 @@ footer nav li
 	font-size: 10px;
 	line-height: 11.73px;
 	color: #444444;
+}
+.send-pics input[type= 'submit']{
+	margin: 0 auto;
 }
 #file-input{
 	display: none;
