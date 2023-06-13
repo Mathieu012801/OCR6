@@ -129,11 +129,15 @@ if (localStorage.getItem('token')!=null) {
   document.querySelector('#filter-container').style.display='flex';
   
 }
-function toggleModal(){
-    document.querySelector(".modal-container").classList.toggle("active");
- 
-    
-};
+function toggleModal() {
+    document.querySelector('.modal-container').classList.toggle('active');
+    backToFirstModal();
+  
+    if (document.querySelector('.arrowback') !== undefined) {
+      document.querySelector('.arrowback').remove();
+    }
+  }
+  
 
 
 document.querySelectorAll(".modal-trigger").forEach(trigger => trigger.addEventListener("click", function(){
@@ -225,16 +229,88 @@ function clearGallery() {
     galleryModal.innerHTML = '';
   }
 
-  function generateAddModal(){
-
+   async function generateAddModal(){
+    const modal= document.querySelector(".modal");
+    const arrowBack= document.createElement("button");
+    const imgArrowBack= document.createElement("img");
+    const galleryModal=document.querySelector(".gallery-modal");
+    const addPics=document.querySelector(".add-pics");
+    const deleteA = document.querySelector(".delete-a");
+    imgArrowBack.src="./assets/images/Arrow_Back.png";
+    imgArrowBack.classList.add("arrowback-img");
+    arrowBack.classList.add("arrowback");
+    arrowBack.appendChild(imgArrowBack);
+    arrowBack.addEventListener('click', backToFirstModal);
+    modal.appendChild(arrowBack);
+    document.querySelector(".modal-title").innerHTML="Ajout photo";
+    galleryModal.style.border="none";
+    galleryModal.style.padding="0";
+    galleryModal.style.width="auto";
+    galleryModal.innerHTML="";
+    addPics.style.display="none";
+    deleteA.style.display="none";
+     await generateForm()
+    
   }
-// //   permet d'afficher modal ajout 
-// const btnAddPictures= document.querySelector(".add-pics"){
-//     generateAddModal();
-
-// }
+  async function generateForm(){
+    const galleryModal=document.querySelector(".gallery-modal");
+    await fetch('http://localhost:5678/api/categories')
+    .then(response => response.json()) // Convertit la réponse en format JSON
+    .then(data =>{
+        galleryModal.innerHTML=`<form class="modal-add">
+        <label for="file-input" class="file-input">
+            <i class="fa-solid fa-image"></i>
+            <h4>+ Ajouter photo</h4>
+            <p class="extension">jpg, png : 4mo max</p>
+        </label>
+        <input type="file" id="file-input" accept=".jpg, .png" class="file-project" required>
+        <label for="title_work-input">Titre</label>
+        <input type="text" id="title_work-input" class="title-project" required>
+        <label for="category_work-input">Catégorie</label>
+            <select class="category-project" required>
+            <option value='default' selected></option>`
+            +
+            data.map((cat)=>
+            `<option value = '${cat.id}'> ${cat.name}</option>`).join("")
+            + 
+            `</select>
+            <span></span>
+            <input type="submit" class="send-pics" value="valider" disabled>
+            </form>`
+    })
     
 
 
+  }
 
+document.querySelector(".add-pics").addEventListener("click", function(e){
+    e.preventDefault();
+    generateAddModal();
+
+
+
+})
+
+//fonction qui va permettre de regenerer la première modal 
+ async function backToFirstModal() {
+    galleryModal.innerHTML = '';
+    document.querySelector('.delete-a').style.display = 'block';
+    document.querySelector('.add-pics').setAttribute('value', 'Ajouter une photo');
+    document.querySelector('.add-pics').style.display = 'inline-block';
+    galleryModal.style.padding = '0px 0px 47px';
+    galleryModal.style.borderBottom = '1px solid #B3B3B3';
+    galleryModal.style.width = '420px';
+    document.querySelector('.modal-title').innerHTML="Galerie photo";
+    await  fetch('http://localhost:5678/api/works')
+    .then(response => response.json()) // Convertit la réponse en format JSON
+    .then(data => {
+        if(document.querySelector(".gallery-modal").firstElementChild==undefined){
+            generategalerymodal(data); // Appelle la fonction pour afficher les données des œuvres
+        }
+      
+
+    });
+
+
+  };
   
