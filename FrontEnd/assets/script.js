@@ -1,5 +1,4 @@
 
-
 // Récupération des éléments DOM
 const gallery = document.getElementById('gallery'); // Élément DOM de la galerie d'images
 const filterContainer = document.getElementById('filter-container'); // Élément DOM du conteneur de filtrage
@@ -252,6 +251,8 @@ function clearGallery() {
     addPics.style.display="none";
     deleteA.style.display="none";
      await generateForm()
+     
+
     
   }
   async function generateForm(){
@@ -266,6 +267,7 @@ function clearGallery() {
             <p class="extension">jpg, png : 4mo max</p>
         </label>
         <input type="file" id="file-input" accept=".jpg, .png" class="file-project" required>
+        
         <label for="title_work-input">Titre</label>
         <input type="text" id="title_work-input" class="title-project" required>
         <label for="category_work-input">Catégorie</label>
@@ -277,13 +279,20 @@ function clearGallery() {
             + 
             `</select>
             <span></span>
-            <input type="submit" class="send-pics" value="valider" disabled>
+            <input type="submit" class="send-pics" value="valider">
             </form>`
-    })
+            
+          
+          })
+          document.querySelector(".send-pics").addEventListener("click",function(e){
+            e.preventDefault();
+            workAdd();
+ 
+   });
+    };
     
 
-
-  }
+  
 
 document.querySelector(".add-pics").addEventListener("click", function(e){
     e.preventDefault();
@@ -320,3 +329,45 @@ document.querySelector(".add-pics").addEventListener("click", function(e){
 
   };
   
+async function workAdd(){
+    var titleWork= document.getElementById("title_work-input").value;
+    var categoryWork=document.querySelector(".category-project").value;
+    var imageWork = document.getElementById("file-input").files[0];
+    var formData= new FormData();
+    formData.append('image', imageWork);
+    formData.append('category', categoryWork);
+    formData.append('title', titleWork);
+
+    
+        const response = await fetch ('http://localhost:5678/api/works',{
+            method : 'POST', 
+            headers : {
+                'Authorization' : `Bearer ${tokenValue}`
+            }, 
+            body : formData
+
+        })
+        if(response.ok){
+          
+            await fetch('http://localhost:5678/api/works',)
+            .then(response => response.json()) // Convertit la réponse en format JSON
+            .then(data => {
+                clearGallery(); // Vide les galeries existantes
+                backToFirstModal();
+                parcourirTableau(data); // Appelle la fonction pour afficher les données des œuvres
+              
+        })
+
+        }
+        
+
+    } 
+
+    
+
+
+
+
+
+
+
