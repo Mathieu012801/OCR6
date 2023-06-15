@@ -251,7 +251,7 @@ function clearGallery() {
     addPics.style.display="none";
     deleteA.style.display="none";
      await generateForm()
-     
+  
 
     
   }
@@ -282,23 +282,21 @@ function clearGallery() {
             <input type="submit" class="send-pics" value="valider">
             </form>`
             
-          
           })
           document.querySelector(".send-pics").addEventListener("click",function(e){
             e.preventDefault();
             workAdd();
- 
+           
    });
-    };
-    
-
+   document.querySelector('#file-input').addEventListener('input', function(e){
+     e.preventDefault();
+     previewLabel();
+   });
   
-
+    };
 document.querySelector(".add-pics").addEventListener("click", function(e){
     e.preventDefault();
     generateAddModal();
-
-
 
 })
 
@@ -364,10 +362,17 @@ async function workAdd(){
     } 
 
     
+// Fonction preview
+
+function previewLabel(){
+    var preview= document.createElement("img");
+    var file= document.querySelector("#file-input").files[0];
+    preview.classList.add(".preview-image");
+    preview.src = URL.createObjectURL(file);
+    document.querySelector(".file-input").innerHTML = "";      
+    document.querySelector(".file-input").appendChild(preview);
+    preview.style.width = "129px";
+    preview.style.height = "100%";
 
 
-
-
-
-
-
+};
