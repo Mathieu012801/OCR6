@@ -279,7 +279,7 @@ function clearGallery() {
             + 
             `</select>
             <span></span>
-            <input type="submit" class="send-pics" value="valider">
+            <input type="submit" class="send-pics" value="valider" >
             </form>`
             
           })
@@ -291,6 +291,7 @@ function clearGallery() {
    document.querySelector('#file-input').addEventListener('input', function(e){
      e.preventDefault();
      previewLabel();
+    //  BtnValidateOk();
    });
   
     };
@@ -376,3 +377,18 @@ function previewLabel(){
 
 
 };
+
+// function BtnValidateOk(){
+//     const img = document.querySelector(".file-project").files[0];
+//     const title = document.querySelector(".title-project").value;
+//     const cat = document.querySelector(".category-project").value;
+//     if(img != undefined && title != "" && cat != "default"){
+//         document.querySelector(".send-pics").classList.remove("disabled");
+//         document.querySelector(".send-pics").classList.add("enabled");
+//         document.querySelector(".send-pics").removeAttribute("disabled");
+//     }else{
+//         document.querySelector(".send-pics").classList.add("disabled");
+//         document.querySelector(".send-pics").classList.remove("enabled");
+//         document.querySelector(".send-pics").setAttribute("disabled",true);
+//     }
+// };
