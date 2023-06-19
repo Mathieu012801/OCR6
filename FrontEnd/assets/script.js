@@ -49,25 +49,44 @@ fetch('http://localhost:5678/api/categories')
     const optionTous = document.createElement('button'); // Crée un bouton pour l'option "Tous"
     optionTous.value = 'tous'; // Définit la valeur du bouton
     optionTous.textContent = 'Tous'; // Définit le texte du bouton
+    optionTous.classList.add('filter-button','active');
     filterContainer.appendChild(optionTous); // Ajoute le bouton au conteneur de filtrage
     console.log(optionTous);
 
     optionTous.addEventListener('click', function () {
         allImages(optionTous.value); // Appelle la fonction pour afficher toutes les images
+        setActiveButton(optionTous);
+      
+
     });
 
     categories.forEach(category => {
         const optionElement = document.createElement('button'); // Crée un bouton pour chaque catégorie
         optionElement.value = category.id; // Définit la valeur du bouton en utilisant l'ID de la catégorie
         optionElement.textContent = category.name; // Définit le texte du bouton en utilisant le nom de la catégorie
+        optionElement.classList.add('filter-button');
         filterContainer.appendChild(optionElement); // Ajoute le bouton au conteneur de filtrage
         console.log(optionElement);
 
         optionElement.addEventListener('click', function () {
             filterImagesCategory(optionElement.value); // Appelle la fonction pour filtrer les images par catégorie
+            setActiveButton(optionElement);
+      
         });
     });
 }
+function setActiveButton(button){
+    const buttons = document.querySelectorAll('.filter-button');
+    buttons.forEach(btn => {
+        if(btn === button){
+            btn.classList.add('active'); 
+            
+        }
+        else{
+            btn.classList.remove('active')
+        }
+    })
+};
 
 // Fonction pour afficher toutes les images ou filtrer par catégorie
 function allImages(categoryId) {
@@ -279,7 +298,7 @@ function clearGallery() {
             + 
             `</select>
             <span></span>
-            <input type="submit" class="send-pics" value="valider" >
+            <input type="submit" class="send-pics" value="valider" disabled>
             </form>`
             
           })
@@ -291,8 +310,11 @@ function clearGallery() {
    document.querySelector('#file-input').addEventListener('input', function(e){
      e.preventDefault();
      previewLabel();
-    //  BtnValidateOk();
+    
    });
+   document.querySelector(".modal-add").addEventListener("input", BtnValidateOk);
+
+
   
     };
 document.querySelector(".add-pics").addEventListener("click", function(e){
@@ -378,17 +400,26 @@ function previewLabel(){
 
 };
 
-// function BtnValidateOk(){
-//     const img = document.querySelector(".file-project").files[0];
-//     const title = document.querySelector(".title-project").value;
-//     const cat = document.querySelector(".category-project").value;
-//     if(img != undefined && title != "" && cat != "default"){
-//         document.querySelector(".send-pics").classList.remove("disabled");
-//         document.querySelector(".send-pics").classList.add("enabled");
-//         document.querySelector(".send-pics").removeAttribute("disabled");
-//     }else{
-//         document.querySelector(".send-pics").classList.add("disabled");
-//         document.querySelector(".send-pics").classList.remove("enabled");
-//         document.querySelector(".send-pics").setAttribute("disabled",true);
-//     }
-// };
+function BtnValidateOk(){
+    const img = document.querySelector(".file-project").files[0];
+    const title = document.querySelector(".title-project").value;
+    const cat = document.querySelector(".category-project").value;
+    if(img != undefined && title != "" && cat != "default"){
+        document.querySelector(".send-pics").classList.remove("disabled");
+        document.querySelector(".send-pics").classList.add("enabled");
+        document.querySelector(".send-pics").removeAttribute("disabled");
+    }else{
+        document.querySelector(".send-pics").classList.add("disabled");
+        document.querySelector(".send-pics").classList.remove("enabled");
+        document.querySelector(".send-pics").setAttribute("disabled",true);
+    }
+};
+function checkImageFormat() {
+    const file = imageInput.files[0];
+    const allowedFormats = ['image/png', 'image/jpeg'];
+  
+    if (file && !allowedFormats.includes(file.type)) {
+      alert('Le format de l\'image doit être en PNG ou JPG.');
+      imageInput.value = ''; // Réinitialise la valeur de l'input
+    }
+  }
