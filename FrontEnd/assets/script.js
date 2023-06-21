@@ -4,7 +4,7 @@ const gallery = document.getElementById('gallery'); // Élément DOM de la galer
 const filterContainer = document.getElementById('filter-container'); // Élément DOM du conteneur de filtrage
 const edited= document.querySelectorAll('.edited');
 const galleryModal= document.querySelector('.gallery-modal');
-let tokenValue = localStorage.token;
+let tokenValue = sessionStorage.token;
 
 // Appel à l'API pour obtenir les données des œuvres
 fetch('http://localhost:5678/api/works')
@@ -119,15 +119,15 @@ function filterImagesCategory(categoryId) {
 }
 const loginElement = document.getElementById('logout');
 
-if (localStorage.getItem('token')) {
+if (sessionStorage.getItem('token')) {
     loginElement.textContent = 'logout';
 } else {
     loginElement.textContent = 'login';
 };
 
 loginElement.addEventListener('click', () => {
-    if (localStorage.getItem('token')) {
-        localStorage.removeItem('token');
+    if (sessionStorage.getItem('token')) {
+        sessionStorage.removeItem('token');
         loginElement.textContent = 'Login';
     }
 });
@@ -135,7 +135,7 @@ loginElement.addEventListener('click', () => {
 // EDITER
 const editionDiv = document.querySelector('.edit_bannier');
 
-if (localStorage.getItem('token')!=null) {
+if (sessionStorage.getItem('token')!=null) {
   edited.forEach (edit=> {
     edit.style.display=('flex');
 
@@ -390,12 +390,19 @@ async function workAdd(){
 function previewLabel(){
     var preview= document.createElement("img");
     var file= document.querySelector("#file-input").files[0];
-    preview.classList.add(".preview-image");
+    console.log(file);
+    if (file.type==="image/png"||file.type==="image/jpg"||file.type==="image/jpeg"){
+        preview.classList.add(".preview-image");
     preview.src = URL.createObjectURL(file);
     document.querySelector(".file-input").innerHTML = "";      
     document.querySelector(".file-input").appendChild(preview);
     preview.style.width = "129px";
     preview.style.height = "100%";
+    } else{
+        file.value=null
+    }
+    
+
 
 
 };
@@ -404,7 +411,7 @@ function BtnValidateOk(){
     const img = document.querySelector(".file-project").files[0];
     const title = document.querySelector(".title-project").value;
     const cat = document.querySelector(".category-project").value;
-    if(img != undefined && title != "" && cat != "default"){
+    if(img != null && title != "" && cat != "default"){
         document.querySelector(".send-pics").classList.remove("disabled");
         document.querySelector(".send-pics").classList.add("enabled");
         document.querySelector(".send-pics").removeAttribute("disabled");
@@ -414,12 +421,5 @@ function BtnValidateOk(){
         document.querySelector(".send-pics").setAttribute("disabled",true);
     }
 };
-function checkImageFormat() {
-    const file = imageInput.files[0];
-    const allowedFormats = ['image/png', 'image/jpeg'];
+
   
-    if (file && !allowedFormats.includes(file.type)) {
-      alert('Le format de l\'image doit être en PNG ou JPG.');
-      imageInput.value = ''; // Réinitialise la valeur de l'input
-    }
-  }

@@ -27,7 +27,7 @@ document.getElementById('btnConnexion').addEventListener('click', function(event
         const token = data.token;
   
         // Stocke le token dans le stockage local du navigateur
-        localStorage.setItem('token', token);
+        sessionStorage.setItem('token', token);
   
         // Redirige vers la page d'accueil
         window.location.href = './index.html';
@@ -43,7 +43,7 @@ document.getElementById('btnConnexion').addEventListener('click', function(event
   });
   
   // Redirige vers la page d'accueil si un token est déjà présent dans le stockage local
-  if (localStorage.getItem('token') != null) {
+  if (sessionStorage.getItem('token') != null) {
     window.location.assign('index.html');
   }
   
