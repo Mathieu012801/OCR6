@@ -283,7 +283,7 @@ function clearGallery() {
         <label for="file-input" class="file-input">
             <i class="fa-solid fa-image"></i>
             <h4>+ Ajouter photo</h4>
-            <p class="extension">jpg, png : 4mo max</p>
+            <p class="format">jpg, png : 4mo max</p>
         </label>
         <input type="file" id="file-input" accept=".jpg, .png" class="file-project" required>
         
@@ -387,38 +387,41 @@ async function workAdd(){
     
 // Fonction preview
 
-function previewLabel(){
-    var preview= document.createElement("img");
-    var file= document.querySelector("#file-input").files[0];
-    console.log(file);
-    if (file.type==="image/png"||file.type==="image/jpg"||file.type==="image/jpeg"){
+function previewLabel() {
+    const preview = document.createElement("img");
+    const fileInput = document.querySelector("#file-input");
+    const filePreviewElement = document.querySelector(".file-input");
+    const file = fileInput.files[0];
+
+    if (file.type === "image/png" || file.type === "image/jpg" || file.type === "image/jpeg") {
+
         preview.classList.add(".preview-image");
-    preview.src = URL.createObjectURL(file);
-    document.querySelector(".file-input").innerHTML = "";      
-    document.querySelector(".file-input").appendChild(preview);
-    preview.style.width = "129px";
-    preview.style.height = "100%";
-    } else{
-        file.value=null
+        preview.src = URL.createObjectURL(file);
+        filePreviewElement.innerHTML = "";
+        filePreviewElement.appendChild(preview);
+        preview.style.width = "129px";
+        preview.style.height = "100%";
+        // effacer ou cacher un message d'erreur
+    } else {
+        fileInput.value = null;
+        // afficher ou écrire un message d'erreur
     }
-    
-
-
-
 };
 
-function BtnValidateOk(){
-    const img = document.querySelector(".file-project").files[0];
+function BtnValidateOk() {
+    const fileInput = document.querySelector("#file-input");
     const title = document.querySelector(".title-project").value;
     const cat = document.querySelector(".category-project").value;
-    if(img != null && title != "" && cat != "default"){
-        document.querySelector(".send-pics").classList.remove("disabled");
-        document.querySelector(".send-pics").classList.add("enabled");
-        document.querySelector(".send-pics").removeAttribute("disabled");
-    }else{
-        document.querySelector(".send-pics").classList.add("disabled");
-        document.querySelector(".send-pics").classList.remove("enabled");
-        document.querySelector(".send-pics").setAttribute("disabled",true);
+    const sendPicsElement = document.querySelector(".send-pics");
+
+    if (fileInput.value && title !== "" && cat !== "default") {
+        sendPicsElement.classList.remove("disabled");
+        sendPicsElement.classList.add("enabled");
+        sendPicsElement.removeAttribute("disabled");
+    } else {
+        sendPicsElement.classList.add("disabled");
+        sendPicsElement.classList.remove("enabled");
+        sendPicsElement.setAttribute("disabled", true);
     }
 };
 
